@@ -28,7 +28,7 @@ def stalkerTeleport():
       #global variable here so the main function can read it
       global stalkerRoom
       #moves the stalker around the map
-      move = random.randint(0,9)
+      move = random.randint(0,8)
       if move == 0:
             stalkerRoom = "Hall"
       elif move == 1:
@@ -127,10 +127,19 @@ currentRoom = 'Hall'
 
 showInstructions()
 
+survive_count = 0
+
 #loop forever
 while True:
 
   showStatus()
+
+  if currentRoom == stalkerRoom:
+        print("Your stalker appeared! and killed you...")
+        print(f"You've survived, {survive_count}, turns")
+        if survive_count == 0:
+              print("Tough luck. lol")
+        break
 
   #get the player's next 'move'
   #.split() breaks it up into an list array
@@ -169,11 +178,14 @@ while True:
       #tell them they can't get it
       print('Can\'t get ' + move[1] + '!')
 
-  #stalker will move now move = random.randint(0,4)
+  #stalker will move now move = random.randint(0,8)
   stalkerTeleport()
   
+  survive_count+= 1
+
   if currentRoom == stalkerRoom:
         print("Your stalker appeared! and killed you...")
+        print(f"You've survived, {survive_count}, turns")
         break
   
   cls()
